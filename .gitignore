@@ -1,0 +1,17 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# PM2
+pm2.pid
+pids/
+*.log
+
+# Uploads và cache
+uploads/
+.DS_Store
+
+# Env files
+.env
