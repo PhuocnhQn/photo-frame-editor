@@ -12,6 +12,8 @@ const framesDir = path.join(__dirname, "public", "frames");
 if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
 if (!fs.existsSync(framesDir)) fs.mkdirSync(framesDir, { recursive: true });
 
+
+
 // Multer storage (uploads)
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, "uploads/"),
@@ -20,7 +22,10 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + ext);
   },
 });
-const upload = multer({ storage });
+const upload = multer({
+  storage,
+  limits: { fileSize: 10 * 1024 * 1024 } // 10MB
+});
 
 // Multer storage (frames)
 const frameStorage = multer.diskStorage({
@@ -31,7 +36,10 @@ const frameStorage = multer.diskStorage({
   },
 });
 
-const uploadFrame = multer({ storage: frameStorage });
+const uploadFrame = multer({
+  storage: frameStorage,
+  limits: { fileSize: 10 * 1024 * 1024 } // 10MB
+});
 
 // Static files
 app.use(express.static("public"));
